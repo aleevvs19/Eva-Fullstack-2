@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotorStore - Carrito</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-3 shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold fs-3 text-white tracking-wide" href="index.html">MotorStore</a>
+                
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
+                    <ul class="navbar-nav align-items-lg-center gap-1 mb-2 mb-lg-0 text-center text-lg-start">
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="Productos.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="RegistroUsuario.html">Registro Usuario</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="IniciarSesion.html">Iniciar Sesión</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="Nosotros.html">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="Blogs.html">Blogs</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="Contacto.html">Contacto</a></li>
+                        <li class="nav-item my-2 my-lg-0 ms-lg-2">
+                            <a href="Carrito.html" class="btn btn-info text-dark fw-bold px-3 py-1 rounded-pill text-nowrap carrito-btn">🛒 Carrito (0)</a>
+                        </li>
+                    </ul>
+                    <button id="btn-modo-oscuro" class="btn btn-outline-light ms-lg-3 mt-2 mt-lg-0 btn-sm px-3 py-2 text-nowrap">Modo Oscuro</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-5">
+        <div class="container">
+            <h2 class="fw-bold mb-4">Mi carrito de compras</h2>
+            <div class="row g-4">
+                <div class="col-12 col-lg-8" id="items-carrito">
+                    </div>
+                
+                <div class="col-12 col-lg-4">
+                    <div class="card border-dark shadow-sm bg-light text-dark">
+                        <div class="card-body p-4 text-center">
+                            <h4 class="mb-3">TOTAL: <span id="total-carrito" class="fw-bold text-success">$0</span></h4>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control border-dark" placeholder="Cupón de descuento">
+                                <button class="btn btn-outline-secondary">Aplicar</button>
+                            </div>
+                            <button class="btn btn-success w-100 fw-bold py-2 text-uppercase">Pagar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">© 2026, <strong>MotorStore</strong> · Santiago, Chile</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
