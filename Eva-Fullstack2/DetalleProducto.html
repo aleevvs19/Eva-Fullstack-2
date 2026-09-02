@@ -43,40 +43,33 @@
     </header>
 
     <main class="py-5">
-        <div class="container" style="max-width: 1000px;">
+        <div class="container" style="max-width: 1000px;" id="detalle-producto-js">
             <nav aria-label="breadcrumb" class="mb-4">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="Productos.html" class="text-decoration-none">Productos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Detalle Producto</li>
+                    <li class="breadcrumb-item active" aria-current="page" id="detalle-breadcrumb">Detalle Producto</li>
                 </ol>
             </nav>
 
             <div class="row g-5 align-items-center bg-light p-4 rounded shadow-sm border border-secondary text-dark">
                 <!-- Imagen Principal -->
                 <div class="col-12 col-md-6">
-                    <img src="img/GSXR1000.jpg" class="img-fluid rounded border border-dark w-100 object-fit-cover" alt="Suzuki GSXR 1000" style="height: 350px;">
-                    <div class="d-flex gap-2 mt-3">
-                        <img src="img/GSXR1000.jpg" class="rounded border" style="width: 70px; height: 70px; object-fit: cover; cursor: pointer;" alt="Thumb 1">
-                        <img src="img/kawa.webp" class="rounded border" style="width: 70px; height: 70px; object-fit: cover; cursor: pointer;" alt="Thumb 2">
-                        <img src="img/r9.jpeg" class="rounded border" style="width: 70px; height: 70px; object-fit: cover; cursor: pointer;" alt="Thumb 3">
-                    </div>
+                    <img id="detalle-img" src="" class="img-fluid rounded border border-dark w-100 object-fit-cover" alt="" style="height: 350px;">
                 </div>
 
                 <!-- Información y Botón de Compra -->
                 <div class="col-12 col-md-6">
-                    <h2 class="fw-bold mb-2">Suzuki GSXR 1000</h2>
-                    <h3 class="text-success fw-bold mb-4">$15.000.000</h3>
+                    <h2 class="fw-bold mb-2" id="detalle-nombre"></h2>
+                    <h3 class="text-success fw-bold mb-4" id="detalle-precio"></h3>
                     
-                    <p class="text-secondary mb-4">
-                        Motocicleta deportiva de alto rendimiento equipada con tecnología de punta, motor de cuatro cilindros en línea y componentes aerodinámicos avanzados para ofrecer el máximo control en pista y carretera.
-                    </p>
+                    <p class="text-secondary mb-4" id="detalle-descripcion"></p>
 
                     <div class="mb-4">
                         <label for="cantidad-prod" class="form-label fw-bold">Cantidad</label>
                         <input type="number" id="cantidad-prod" class="form-control border-dark w-50" value="1" min="1">
                     </div>
 
-                    <a href="Carrito.html" class="btn btn-dark w-100 fw-bold py-2 text-uppercase">Añadir al carrito</a>
+                    <button id="detalle-btn-agregar" class="btn btn-dark w-100 fw-bold py-2 text-uppercase">Añadir al carrito</button>
                 </div>
             </div>
         </div>

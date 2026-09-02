@@ -180,17 +180,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 6. CATÁLOGO Y CARRITO CON LOCALSTORAGE
+    // 6. CATÁLOGO, DETALLE Y CARRITO CON LOCALSTORAGE
     // ==========================================
     
     // Nuestro inventario de productos
     const productos = [
-        { id: 1, nombre: "Suzuki GSXR 1000", categoria: "Deportiva", precio: 15000000, img: "img/GSXR1000.jpg" },
-        { id: 2, nombre: "Kawasaki Ninja", categoria: "Deportiva", precio: 14500000, img: "img/kawa.webp" },
-        { id: 3, nombre: "Yamaha R9", categoria: "Deportiva", precio: 16000000, img: "img/r9.jpeg" },
-        { id: 4, nombre: "Porta Patente", categoria: "Accesorio", precio: 40000, img: "img/pl.jpg" },
-        { id: 5, nombre: "Chaqueta MotorStore", categoria: "Indumentaria", precio: 120000, img: "img/pl.jpg" },
-        { id: 6, nombre: "Casco Integral", categoria: "Seguridad", precio: 85000, img: "img/pl.jpg" }
+        { id: 1, nombre: "Suzuki GSXR 1000", categoria: "Deportiva", precio: 15000000, img: "img/GSXR1000.jpg",
+          descripcion: "Motocicleta deportiva de alto rendimiento equipada con tecnología de punta, motor de cuatro cilindros en línea y componentes aerodinámicos avanzados para ofrecer el máximo control en pista y carretera." },
+        { id: 2, nombre: "Kawasaki Ninja", categoria: "Deportiva", precio: 14500000, img: "img/kawa.webp",
+          descripcion: "Ícono deportivo con un motor potente y ágil, diseñado para quienes buscan velocidad, precisión en las curvas y un manejo deportivo en cada trayecto." },
+        { id: 3, nombre: "Yamaha R9", categoria: "Deportiva", precio: 16000000, img: "img/r9.jpeg",
+          descripcion: "Superdeportiva de última generación con chasis liviano, electrónica avanzada y un diseño agresivo pensado para dominar la pista." },
+        { id: 4, nombre: "Porta Patente", categoria: "Accesorio", precio: 40000, img: "img/pl.jpg",
+          descripcion: "Accesorio resistente y de fácil instalación, fabricado en materiales de alta durabilidad para proteger y lucir tu patente." },
+        { id: 5, nombre: "Chaqueta MotorStore", categoria: "Indumentaria", precio: 120000, img: "img/pl.jpg",
+          descripcion: "Chaqueta de moto con protecciones reforzadas, diseño ergonómico y materiales resistentes al viento y la abrasión." },
+        { id: 6, nombre: "Casco Integral", categoria: "Seguridad", precio: 85000, img: "img/pl.jpg",
+          descripcion: "Casco integral certificado, con excelente ventilación, visor anti-rayado y máxima protección para el conductor." }
     ];
 
     // Cargar el carrito guardado o iniciar uno vacío
@@ -204,9 +210,13 @@ document.addEventListener("DOMContentLoaded", () => {
             col.className = 'col-12 col-sm-6 col-md-3 mb-4';
             col.innerHTML = `
                 <div class="card h-100 bg-dark text-white border-secondary shadow">
-                    <img src="${prod.img}" class="card-img-top bg-secondary img-producto" alt="${prod.nombre}">
+                    <a href="DetalleProducto.html?id=${prod.id}">
+                        <img src="${prod.img}" class="card-img-top bg-secondary img-producto" alt="${prod.nombre}">
+                    </a>
                     <div class="card-body d-flex flex-column justify-content-between text-center">
-                        <h5 class="card-title text-primary fs-6 mb-2">${prod.nombre}</h5>
+                        <a href="DetalleProducto.html?id=${prod.id}" class="text-decoration-none">
+                            <h5 class="card-title text-primary fs-6 mb-2">${prod.nombre}</h5>
+                        </a>
                         <div class="d-flex justify-content-between align-items-center mt-auto mb-3">
                             <small class="text-muted">${prod.categoria}</small>
                             <span class="fw-bold text-light">$${prod.precio.toLocaleString('es-CL')}</span>
@@ -225,6 +235,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 agregarAlCarrito(idProducto);
             });
         });
+    }
+
+    // --- A2. MOSTRAR DETALLE EN DetalleProducto.html ---
+    const contenedorDetalle = document.getElementById('detalle-producto-js');
+    if (contenedorDetalle) {
+        const params = new URLSearchParams(window.location.search);
+        const idProducto = parseInt(params.get('id'));
+        const producto = productos.find(p => p.id === idProducto);
+
+        if (producto) {
+            document.getElementById('detalle-img').src = producto.img;
+            document.getElementById('detalle-img').alt = producto.nombre;
+            document.getElementById('detalle-nombre').textContent = producto.nombre;
+            document.getElementById('detalle-precio').textContent = `$${producto.precio.toLocaleString('es-CL')}`;
+            document.getElementById('detalle-descripcion').textContent = producto.descripcion;
+            document.getElementById('detalle-breadcrumb').textContent = producto.nombre;
+            document.title = `MotorStore - ${producto.nombre}`;
+
+            const btnDetalleAgregar = document.getElementById('detalle-btn-agregar');
+            if (btnDetalleAgregar) {
+                btnDetalleAgregar.addEventListener('click', () => {
+                    const cantidad = parseInt(document.getElementById('cantidad-prod').value) || 1;
+                    for (let i = 0; i < cantidad; i++) {
+                        agregarAlCarrito(producto.id);
+                    }
+                });
+            }
+        } else {
+            contenedorDetalle.innerHTML = '<p class="text-center text-danger">Producto no encontrado.</p>';
+        }
     }
 
     // --- B. LÓGICA DEL CARRITO ---
