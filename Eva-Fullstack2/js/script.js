@@ -196,6 +196,18 @@ document.addEventListener("DOMContentLoaded", () => {
         { id: 5, nombre: "Chaqueta MotorStore", categoria: "Indumentaria", precio: 120000, img: "img/pl.jpg",
           descripcion: "Chaqueta de moto con protecciones reforzadas, diseño ergonómico y materiales resistentes al viento y la abrasión." },
         { id: 6, nombre: "Casco Integral", categoria: "Seguridad", precio: 85000, img: "img/pl.jpg",
+          descripcion: "Casco integral certificado, con excelente ventilación, visor anti-rayado y máxima protección para el conductor." },
+        { id: 7, nombre: "Chaqueta MotorStore", categoria: "Indumentaria", precio: 120000, img: "img/chaqueta.jpg",
+          descripcion: "Chaqueta de moto con protecciones reforzadas, diseño ergonómico y materiales resistentes al viento y la abrasión." },
+        { id: 8, nombre: "Casco Integral", categoria: "Seguridad", precio: 430990, img: "img/casco.jpg",
+          descripcion: "Casco integral certificado, con excelente ventilación, visor anti-rayado y máxima protección para el conductor." },
+        { id: 9, nombre: "Chaqueta MotorStore", categoria: "Indumentaria", precio: 120000, img: "img/pl.jpg",
+          descripcion: "Chaqueta de moto con protecciones reforzadas, diseño ergonómico y materiales resistentes al viento y la abrasión." },
+        { id: 10, nombre: "Casco Integral", categoria: "Seguridad", precio: 85000, img: "img/pl.jpg",
+          descripcion: "Casco integral certificado, con excelente ventilación, visor anti-rayado y máxima protección para el conductor." },
+        { id: 11, nombre: "Chaqueta MotorStore", categoria: "Indumentaria", precio: 120000, img: "img/chaqueta.jpg",
+          descripcion: "Chaqueta de moto con protecciones reforzadas, diseño ergonómico y materiales resistentes al viento y la abrasión." },
+        { id: 12, nombre: "Casco Integral", categoria: "Seguridad", precio: 430990, img: "img/casco.jpg",
           descripcion: "Casco integral certificado, con excelente ventilación, visor anti-rayado y máxima protección para el conductor." }
     ];
 
