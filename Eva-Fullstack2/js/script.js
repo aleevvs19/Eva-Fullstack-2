@@ -262,7 +262,13 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('detalle-nombre').textContent = producto.nombre;
             document.getElementById('detalle-precio').textContent = `$${producto.precio.toLocaleString('es-CL')}`;
             document.getElementById('detalle-descripcion').textContent = producto.descripcion;
-            document.getElementById('detalle-breadcrumb').textContent = producto.nombre;
+            
+            // ACTUALIZACIÓN DEL BREADCRUMB 
+            const breadcrumbItem = document.getElementById('detalle-breadcrumb');
+            if (breadcrumbItem) {
+                breadcrumbItem.textContent = producto.nombre;
+            }
+            
             document.title = `MotorStore - ${producto.nombre}`;
 
             const btnDetalleAgregar = document.getElementById('detalle-btn-agregar');

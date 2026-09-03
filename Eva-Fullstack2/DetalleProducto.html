@@ -44,34 +44,40 @@
 
     <main class="py-5">
         <div class="container" style="max-width: 1000px;" id="detalle-producto-js">
+            
+            <!-- Ruta de navegación limpia y separada -->
             <nav aria-label="breadcrumb" class="mb-4">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="Productos.html" class="text-decoration-none">Productos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page" id="detalle-breadcrumb">Detalle Producto</li>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="Productos.html" class="text-decoration-none" style="color:#0d6efd;">Productos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" id="detalle-breadcrumb" style="color:#212529;">Detalle Producto</li>
                 </ol>
             </nav>
 
-            <div class="row g-5 align-items-center bg-light p-4 rounded shadow-sm border border-secondary text-dark">
-                <!-- Imagen Principal -->
-                <div class="col-12 col-md-6">
-                    <img id="detalle-img" src="" class="img-fluid rounded border border-dark w-100 object-fit-cover" alt="" style="height: 350px;">
-                </div>
-
-                <!-- Información y Botón de Compra -->
-                <div class="col-12 col-md-6">
-                    <h2 class="fw-bold mb-2" id="detalle-nombre"></h2>
-                    <h3 class="text-success fw-bold mb-4" id="detalle-precio"></h3>
-                    
-                    <p class="text-secondary mb-4" id="detalle-descripcion"></p>
-
-                    <div class="mb-4">
-                        <label for="cantidad-prod" class="form-label fw-bold">Cantidad</label>
-                        <input type="number" id="cantidad-prod" class="form-control border-dark w-50" value="1" min="1">
+            <!-- Caja contenedora del producto independiente -->
+            <div class="bg-light p-4 rounded shadow-sm border border-secondary text-dark mt-3">
+                <div class="row g-5 align-items-center">
+                    <!-- Imagen Principal -->
+                    <div class="col-12 col-md-6">
+                        <img id="detalle-img" src="" class="img-fluid rounded border border-dark w-100 object-fit-cover" alt="" style="height: 350px;">
                     </div>
 
-                    <button id="detalle-btn-agregar" class="btn btn-dark w-100 fw-bold py-2 text-uppercase">Añadir al carrito</button>
+                    <!-- Información y Botón de Compra -->
+                    <div class="col-12 col-md-6">
+                        <h2 class="fw-bold mb-2" id="detalle-nombre"></h2>
+                        <h3 class="text-success fw-bold mb-4" id="detalle-precio"></h3>
+                        
+                        <p class="text-secondary mb-4" id="detalle-descripcion"></p>
+
+                        <div class="mb-4">
+                            <label for="cantidad-prod" class="form-label fw-bold">Cantidad</label>
+                            <input type="number" id="cantidad-prod" class="form-control border-dark w-50" value="1" min="1">
+                        </div>
+
+                        <button id="detalle-btn-agregar" class="btn btn-dark w-100 fw-bold py-2 text-uppercase">Añadir al carrito</button>
+                    </div>
                 </div>
             </div>
+
         </div>
     </main>
 
@@ -85,4 +91,3 @@
     <script src="js/script.js"></script>
 </body>
 </html>
-
