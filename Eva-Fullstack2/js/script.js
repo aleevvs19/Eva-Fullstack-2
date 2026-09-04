@@ -58,17 +58,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const mostrarError = (inputId, errorId, mensaje) => {
         const input = document.getElementById(inputId);
         const errorDiv = document.getElementById(errorId);
-        input.classList.add('is-invalid'); // Clase de Bootstrap para borde rojo
-        errorDiv.textContent = mensaje;
-        errorDiv.classList.remove('d-none');
+        if (input) input.classList.add('is-invalid'); // Clase de Bootstrap para borde rojo
+        if (errorDiv) {
+            errorDiv.textContent = mensaje;
+            errorDiv.classList.remove('d-none');
+        }
     };
 
     // Oculta el mensaje si el campo es correcto
     const limpiarError = (inputId, errorId) => {
         const input = document.getElementById(inputId);
         const errorDiv = document.getElementById(errorId);
-        input.classList.remove('is-invalid');
-        errorDiv.classList.add('d-none');
+        if (input) input.classList.remove('is-invalid');
+        if (errorDiv) errorDiv.classList.add('d-none');
     };
 
     // Valida dominios permitidos
@@ -136,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const txtMensaje = document.getElementById('cont-mensaje');
         const contador = document.getElementById('contador-mensaje');
         
-        if (txtMensaje) {
+        if (txtMensaje && contador) {
             txtMensaje.addEventListener('input', () => {
                 contador.textContent = txtMensaje.value.length;
             });
@@ -174,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (formularioValido) {
                 alert('¡Mensaje enviado correctamente!');
                 formContacto.reset();
-                contador.textContent = '0';
+                if (contador) contador.textContent = '0';
             }
         });
     }
@@ -371,4 +373,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Actualizar el número del botón en el nav en todas las páginas
     actualizarIconoCarrito();
+
+    // ==========================================
+    // 7. VALIDACIÓN: INICIO DE SESIÓN Y ROLES
+    // ==========================================
+    const formLogin = document.getElementById('form-login');
+    if (formLogin) {
+        formLogin.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let formularioValido = true;
+
+            // Limpiar errores previos
+            limpiarError('login-correo', 'error-login-correo');
+            limpiarError('login-pass', 'error-login-pass');
+
+            const correo = document.getElementById('login-correo').value.trim();
+            const pass = document.getElementById('login-pass').value;
+
+            // Validar Correo
+            if (correo === '' || !esCorreoValido(correo)) {
+                mostrarError('login-correo', 'error-login-correo', 'Ingresa un correo válido terminado en @duoc.cl, @profesor.duoc.cl o @gmail.com.');
+                formularioValido = false;
+            }
+
+            // Validar Contraseña (entre 4 y 10 caracteres)
+            if (pass.length < 4 || pass.length > 10) {
+                mostrarError('login-pass', 'error-login-pass', 'La contraseña debe tener entre 4 y 10 caracteres.');
+                formularioValido = false;
+            }
+
+            // SIMULACIÓN DE ROLES (ADMIN VS USUARIO)
+            if (formularioValido) {
+                const correoAdmin = "admin@duoc.cl";
+                const passAdmin = "12345"; // Clave simulada para el admin
+
+                if (correo === correoAdmin && pass === passAdmin) {
+                    alert("¡Bienvenido Administrador! Tienes acceso total al sistema.");
+                    localStorage.setItem('rolUsuario', 'admin');
+                    window.location.href = "index.html"; // Redirigir al inicio o panel admin
+                } 
+                else if (correo !== correoAdmin && pass.length >= 4) {
+                    alert(`¡Bienvenido usuario ${correo.split('@')[0]}!`);
+                    localStorage.setItem('rolUsuario', 'cliente');
+                    window.location.href = "Productos.html"; // Redirigir a la tienda
+                } 
+                else {
+                    mostrarError('login-pass', 'error-login-pass', 'Credenciales incorrectas.');
+                }
+            }
+        });
+    }
 });
