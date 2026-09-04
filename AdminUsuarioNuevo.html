@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotorStore - Nuevo Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-admin-page="true">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-3 shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold fs-3 text-white tracking-wide" href="AdminHome.html">MotorStore <span class="badge bg-info text-dark ms-2">Admin</span></a>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
+                    <ul class="navbar-nav align-items-lg-center gap-1 mb-2 mb-lg-0 text-center text-lg-start me-lg-3">
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="AdminHome.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="AdminProductos.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link px-2 text-nowrap" href="AdminUsuarios.html">Usuarios</a></li>
+                    </ul>
+                    <span class="text-white me-3 small">Sesión: <strong id="admin-correo-actual"></strong></span>
+                    <button id="btn-cerrar-sesion" class="btn btn-outline-light btn-sm px-3">Cerrar sesión</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-5">
+        <div class="container d-flex justify-content-center">
+            <div class="card w-100 shadow-sm border-0" style="max-width: 650px;">
+                <div class="card-header bg-secondary text-white text-center py-3">
+                    <h4 class="mb-0 text-uppercase fw-bold">Nuevo Usuario</h4>
+                </div>
+                <div class="card-body p-4 bg-light text-dark">
+                    <form id="form-nuevo-usuario" novalidate>
+                        <div class="mb-3">
+                            <label for="nu-nombre" class="form-label fw-bold">NOMBRE COMPLETO</label>
+                            <input type="text" class="form-control border-dark" id="nu-nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nu-correo" class="form-label fw-bold">CORREO</label>
+                            <input type="email" class="form-control border-dark" id="nu-correo" placeholder="ejemplo@duoc.cl">
+                            <div class="form-text text-muted">Solo dominios @duoc.cl, @profesor.duoc.cl y @gmail.com</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nu-pass" class="form-label fw-bold">CONTRASEÑA</label>
+                            <input type="password" class="form-control border-dark" id="nu-pass" placeholder="Entre 4 y 10 caracteres">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nu-telefono" class="form-label fw-bold">TELÉFONO (opcional)</label>
+                            <input type="tel" class="form-control border-dark" id="nu-telefono" placeholder="+56 9 1234 5678">
+                        </div>
+                        <div class="row mb-4 g-3">
+                            <div class="col-12 col-md-6">
+                                <label for="nu-region" class="form-label fw-bold">REGIÓN</label>
+                                <select class="form-select border-dark" id="nu-region">
+                                    <option value="" selected disabled>-- Seleccione la región --</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <label for="nu-comuna" class="form-label fw-bold">COMUNA</label>
+                                <select class="form-select border-dark" id="nu-comuna" disabled>
+                                    <option value="" selected disabled>-- Seleccione la comuna --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="AdminUsuarios.html" class="btn btn-outline-secondary px-4">Cancelar</a>
+                            <button type="submit" class="btn btn-dark px-4 fw-bold text-uppercase">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p class="mb-0">© 2026, <strong>MotorStore</strong> · Panel interno · Santiago, Chile</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
