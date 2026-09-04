@@ -178,8 +178,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 formContacto.reset();
                 if (contador) contador.textContent = '0';
             }
+            // INTEGRACIÓN: Envío real a través de EmailJS si pasa las validaciones
+            if (formularioValido) {
+                alert('Enviando mensaje de contacto de forma segura...');
+
+                // Empaquetamos los campos vinculándolos con tu plantilla (Contact Us)
+                var parametrosCorreo = {
+                    name: nombre,
+                    email: correo,
+                    message: mensaje
+                };
+
+                // Realizamos el despacho asíncrono con tus identificadores reales
+                emailjs.send('service_qa76zqe', 'template_v102jmr', parametrosCorreo)
+                    .then(function(response) {
+                        alert('¡Mensaje enviado con éxito! El correo llegará directo a osw.andrade@duocuc.cl');
+                        formContacto.reset(); // Limpia el formulario
+                        if (contador) contador.textContent = '0'; // Reinicia el contador de texto visual
+                    }, function(error) {
+                        alert('Hubo un error al despachar el mensaje por EmailJS. Por favor revisa la consola.');
+                        console.log('Error detallado de EmailJS:', error);
+                    });
+            }
         });
     }
+            
 
     // ==========================================
     // 6. CATÁLOGO, DETALLE Y CARRITO CON LOCALSTORAGE
@@ -426,38 +449,45 @@ document.addEventListener("DOMContentLoaded", () => {
         });
                           
     }
-    // ==========================================
-    // 8. CONTROL INTERNO DEL PANEL ADMIN (SOLO PARA PÁGINAS DE ADMIN)
-    // ==========================================
-    // IMPORTANTE: Esta validación SOLO se ejecutará si el cuerpo tiene la marca de admin
-    if (document.body && document.body.getAttribute('data-admin-page') === 'true') {
-        var rolGuardado = localStorage.getItem('userRole');
-        var correoGuardado = localStorage.getItem('userEmail');
 
-        // Guardián de seguridad: Si no es admin, lo saca de la página privada
-        if (rolGuardado !== 'admin') {
-            alert('Acceso denegado. No tienes permisos para ingresar a esta sección.');
-            window.location.href = 'IniciarSesion.html'; 
-        } else {
-            // Si es admin y todo está correcto, muestra su correo en la navbar
-            var txtCorreoAdmin = document.getElementById('admin-correo-actual');
-            if (txtCorreoAdmin && correoGuardado) {
-                txtCorreoAdmin.textContent = correoGuardado;
+    // 8. CONTROL INTERNO DEL PANEL ADMIN (SOLO PARA PÁGINAS DE ADMIN)
+    // Escuchamos el evento 'pageshow' para forzar a que el código corra SIEMPRE, incluso al ir Atrás/Adelante
+    window.addEventListener('pageshow', () => {
+        if (document.body && document.body.getAttribute('data-admin-page') === 'true') {
+            var rolGuardado = localStorage.getItem('userRole');
+            var correoGuardado = localStorage.getItem('userEmail');
+
+            // Guardián de seguridad implacable
+            if (rolGuardado !== 'admin') {
+                alert('Acceso denegado. No tienes permisos para ingresar a esta sección.');
+                window.location.replace('IniciarSesion.html'); // Usamos replace para borrar el historial de esa página
+                return; // Corta la ejecución del código restante
+            } else {
+                // Si es admin, inyecta su correo en la navbar
+                var txtCorreoAdmin = document.getElementById('admin-correo-actual');
+                if (txtCorreoAdmin && correoGuardado) {
+                    txtCorreoAdmin.textContent = correoGuardado;
+                }
             }
         }
+    });
 
-        // Evento exclusivo para el botón Cerrar Sesión del panel de administración
+    // botón de cerrar sesión
+    if (document.body && document.body.getAttribute('data-admin-page') === 'true') {
         var btnLogout = document.getElementById('btn-cerrar-sesion');
         if (btnLogout) {
             btnLogout.addEventListener('click', (e) => {
                 e.preventDefault();
+                
                 localStorage.removeItem('userRole');
                 localStorage.removeItem('userEmail');
+                
                 alert('Has cerrado sesión correctamente.');
                 window.location.href = 'IniciarSesion.html';
             });
         }
     }
+
 });
 
 
