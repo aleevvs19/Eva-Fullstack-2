@@ -408,13 +408,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 const passAdmin = "12345"; // Clave simulada para el admin
 
                 if (correo === correoAdmin && pass === passAdmin) {
+                    localStorage.setItem('userRole', 'admin')
+                    localStorage.setItem('userEmail', correo)
                     alert("¡Bienvenido Administrador! Tienes acceso total al sistema.");
-                    localStorage.setItem('rolUsuario', 'admin');
-                    window.location.href = "index.html"; // Redirigir al inicio o panel admin
+                    window.location.href = "adminHome.html"; // Redirigir al inicio o panel admin
                 } 
-                else if (correo !== correoAdmin && pass.length >= 4) {
+                else if (correo === 'cliente@duoc.cl' && pass === 'user123') {
+                    localStorage.setItem('userRole', 'cliente')
+                    localStorage.setItem('userEmail', correo)
                     alert(`¡Bienvenido usuario ${correo.split('@')[0]}!`);
-                    localStorage.setItem('rolUsuario', 'cliente');
                     window.location.href = "Productos.html"; // Redirigir a la tienda
                 } 
                 else {
@@ -422,5 +424,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         });
+                          
+    }
+    // ==========================================
+    // 8. CONTROL INTERNO DEL PANEL ADMIN (SOLO PARA PÁGINAS DE ADMIN)
+    // ==========================================
+    // IMPORTANTE: Esta validación SOLO se ejecutará si el cuerpo tiene la marca de admin
+    if (document.body && document.body.getAttribute('data-admin-page') === 'true') {
+        var rolGuardado = localStorage.getItem('userRole');
+        var correoGuardado = localStorage.getItem('userEmail');
+
+        // Guardián de seguridad: Si no es admin, lo saca de la página privada
+        if (rolGuardado !== 'admin') {
+            alert('Acceso denegado. No tienes permisos para ingresar a esta sección.');
+            window.location.href = 'IniciarSesion.html'; 
+        } else {
+            // Si es admin y todo está correcto, muestra su correo en la navbar
+            var txtCorreoAdmin = document.getElementById('admin-correo-actual');
+            if (txtCorreoAdmin && correoGuardado) {
+                txtCorreoAdmin.textContent = correoGuardado;
+            }
+        }
+
+        // Evento exclusivo para el botón Cerrar Sesión del panel de administración
+        var btnLogout = document.getElementById('btn-cerrar-sesion');
+        if (btnLogout) {
+            btnLogout.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('userEmail');
+                alert('Has cerrado sesión correctamente.');
+                window.location.href = 'IniciarSesion.html';
+            });
+        }
     }
 });
+
+
