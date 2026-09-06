@@ -1,0 +1,85 @@
+ESPECIFICACIÓN DE REQUISITOS DEL SISTEMA (ERS)
+Proyecto: MotorStore Plataforma E-Commerce y Panel de Administración
+
+
+
+
+
+
+
+
+
+
+
+
+Asignatura: Desarrollo Fullstack II 
+Integrantes del Equipo de Desarrollo:
+Alejandro Salazar – Desarrollador JavaScript & Lógica de Negocio
+Oswel Andrade – Desarrollador Frontend & Control de Versiones (Git)
+Benjamín Navarrete – Diseño UI/UX & Documentación ERS (QA)
+
+
+
+
+1. Introducción y Propósito
+1.1 Propósito del Documento
+El presente documento tiene como objetivo especificar de manera formal los requisitos funcionales y no funcionales del sistema web MotorStore, una plataforma de comercio electrónico de tipo B2C orientada a la venta de motocicletas, repuestos, indumentaria y accesorios de seguridad, complementada con un panel de administración (backoffice) protegido por roles.
+1.2 Alcance del Sistema
+MotorStore es una aplicación web de arquitectura orientada al cliente (Frontend-centric), desarrollada con tecnologías web estándar. El sistema cubre todo el ciclo de interacción del usuario final —desde la exploración del catálogo, gestión del carrito de compras y autenticación, hasta el envío de consultas mediante pasarelas de correo electrónico—, además de proveer herramientas de gestión de inventario y control de usuarios para el personal administrador.
+2. Descripción General del Sistema
+2.1 Perspectiva del Producto
+El sistema opera del lado del cliente utilizando HTML5 semántico, maquetación adaptativa con Bootstrap 5.3 y lógica de negocio mediante JavaScript (ES6+). La persistencia de datos (como el catálogo, el carrito de compras y las cuentas de usuarios) se simula y gestiona eficientemente a través de la API LocalStorage del navegador web.
+2.2 Funciones Principales
+•	Catálogo y Navegación Dinámica: Visualización de productos organizados por categorías, con vistas de detalle individuales enlazadas por parámetros URL (?id=x).
+•	Carrito de Compras Interactivo: Adición de productos, modificación de cantidades en tiempo real, cálculo automático de subtotales y montos totales expresados en pesos chilenos (CLP).
+•	Validaciones Estrictas de Formularios: Restricciones de entrada orientadas a la seguridad y consistencia de los datos (filtrado de dominios de correo permitidos, validación de longitudes de contraseñas y control de caracteres).
+•	Mensajería Asíncrona (EmailJS): Despacho real y automatizado de correos electrónicos desde el formulario de contacto.
+•	Control de Accesos y Roles: Diferenciación de perfiles entre Clientes y Administradores (admin@duoc.cl), con un mecanismo de seguridad que restringe el acceso a las vistas de administración.
+•	Panel de Administración (CRUD): Módulos para listar, registrar, editar y eliminar tanto productos del inventario como usuarios del sistema.
+3. Requisitos Funcionales (RF)
+ID	Módulo	Descripción del Requisito
+RF-01	Catálogo	El sistema debe renderizar dinámicamente las tarjetas de productos en la vista de catálogo a partir de una estructura de datos centralizada.
+RF-02	Detalle	Al seleccionar un producto, la aplicación debe capturar el parámetro de la URL, buscar el registro correspondiente y mostrar su información detallada y selector de cantidad.
+RF-03	Carrito	El usuario debe poder añadir, actualizar y eliminar ítems del carrito de compras, visualizando de forma inmediata el recálculo del valor total, con persistencia en LocalStorage.
+RF-04	Registro	El formulario de registro debe validar obligatoriamente que el correo pertenezca a los dominios autorizados (@duoc.cl, @profesor.duoc.cl, @gmail.com) y que la contraseña cumpla con el rango de 4 a 10 caracteres.
+RF-05	Territorio	El formulario de registro debe integrar selectores dinámicos e interdependientes para la selección de Regiones y Comunas de Chile.
+RF-06	Autenticación	El sistema debe validar las credenciales de inicio de sesión y asignar un rol (admin o cliente) almacenándolo en la sesión local.
+RF-07	Seguridad Backoffice	Las páginas de administración (AdminHome.html, AdminProductos.html, etc.) deben verificar la existencia de un rol de administrador válido, bloqueando el acceso a usuarios no autorizados mediante redirección.
+RF-08	Contacto & EmailJS	El formulario de contacto debe validar la integridad de los datos ingresados y despachar el mensaje mediante la API de EmailJS de forma asíncrona.
+RF-09	Gestión Admin	El panel de administración debe permitir al usuario con rol de administrador realizar operaciones de alta, baja y modificación sobre el inventario y los usuarios registrados.
+
+
+
+
+
+
+
+
+
+
+4. Requisitos No Funcionales (RNF)
+ID	Categoría	Descripción del Requisito
+RNF-01	Usabilidad	La interfaz de usuario debe ser completamente responsiva (Mobile First), adaptándose correctamente a dispositivos móviles, tablets y pantallas de escritorio mediante Bootstrap 5.3.
+RNF-02	Accesibilidad	La plataforma debe incluir un mecanismo interactivo (Modo Oscuro) para alternar la paleta de colores y mejorar la experiencia visual del usuario.
+RNF-03	Mantenibilidad	El código fuente en JavaScript debe estar modularizado, estructurado con funciones claras y comentado adecuadamente para facilitar su lectura y escalabilidad.
+RNF-04	Control de Versiones	El desarrollo del proyecto debe ser respaldado y versionado en un repositorio remoto de GitHub, manteniendo un historial de commits ordenado y descriptivo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. Arquitectura y Estructura de Archivos
+El proyecto se encuentra organizado modularmente para separar las vistas HTML, los estilos visuales, la lógica de control y los recursos estáticos:
+•	Vistas Públicas: index.html, Productos.html, DetalleProducto.html, Carrito.html, RegistroUsuario.html, IniciarSesion.html, Contacto.html, Nosotros.html, Blogs.html, DetalleBlog1.html, DetalleBlog2.html.
+•	Vistas de Administración: AdminHome.html, AdminProductos.html, AdminProductoNuevo.html, AdminProductoEditar.html, AdminUsuarios.html, AdminUsuarioNuevo.html
+•	Hojas de Estilo: /css/style.css (estilos globales, variables y modo oscuro).
+•	Lógica Frontend: /js/script.js (validaciones, carrito, LocalStorage, EmailJS y control de rutas)
+•	Recursos Gráficos: /img/ (fotografías de productos y avatares del equipo)
