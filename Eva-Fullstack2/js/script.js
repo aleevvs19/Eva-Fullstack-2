@@ -436,7 +436,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert("¡Bienvenido Administrador! Tienes acceso total al sistema.");
                     window.location.href = "adminHome.html"; // Redirigir al inicio o panel admin
                 } 
-                else if (correo === 'cliente@duoc.cl' && pass === 'user123') {
+                else if (esCorreoValido(correo) && pass !== '') {
                     localStorage.setItem('userRole', 'cliente')
                     localStorage.setItem('userEmail', correo)
                     alert(`¡Bienvenido usuario ${correo.split('@')[0]}!`);
